@@ -1,17 +1,8 @@
 langchain
 langchain-google-genai
-langchain-openai
 langchain-community
-langgraph
-langgraph-supervisor
-numpy
-pandas
-matplotlib
-seaborn
-scikit-learn
 python-dotenv
 streamlit
-youtube-transcript-api
 pymupdf
 faiss-cpu
 bs4
