@@ -202,8 +202,8 @@ def chat_interface():
 
 # -------------------- MAIN -------------------- #
 def main():
-    st.set_page_config(page_title="Chat with your code", layout="wide")
-    st.title("💻 Chat with your code")
+    st.set_page_config(page_title="Chat with your Python code", layout="wide")
+    st.title("💻 Chat with your Python code")
     st.caption("AI assistant for generating documentation, articles, and blogs from your codebase.")
 
     init_session_state()
