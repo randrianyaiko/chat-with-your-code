@@ -14,7 +14,7 @@ class Agents:
         self.agent_prompt = pull("hwchase17/react")
         self.search_tool = Tool(
                 name="search",
-                func=vector_store.search,
+                func=vector_store.searchAndFormat,
                 description="Searches the code base for relevant information."
             )
 
@@ -35,7 +35,7 @@ class Agents:
         self.summary = ""
     
     def run(self, input_text:str, content_type:str="Documentation"):
-        input_text = f"{self.codebasetree}\n\n{input_text}\nThe goal is to have a {content_type} content type.\n\n"
+        input_text = f"{self.codebasetree}\n\n{input_text}\n\n.The goal of the whole chat is to have a {content_type} content type.\n\n"
         input = {"input": input_text}
         self.chat_history.append(input)
         response = self.writter_agent.invoke(input)
