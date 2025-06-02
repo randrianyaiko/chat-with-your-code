@@ -1,6 +1,5 @@
 langchain
 langchain-google-genai
-fastembed
 langchain-community
 python-dotenv
 streamlit
