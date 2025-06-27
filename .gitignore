@@ -3,3 +3,4 @@ env/
 *.ipynb
 *.pyc
 .fastembed_cache/
+models.xlsx
