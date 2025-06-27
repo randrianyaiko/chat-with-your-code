@@ -38,6 +38,7 @@ class Agents:
         input_text = f"{self.codebasetree}\n\n{input_text}\n\n.The goal of the whole chat is to have a {content_type} content type.\n\n"
         input = {"input": input_text}
         self.chat_history.append(input)
+        input = {"input": input_text+ f"\n\nChat History:{self.chat_history}"}
         response = self.writter_agent.invoke(input)
         self.chat_history.append(response)
         return response['output']

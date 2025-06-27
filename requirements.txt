@@ -6,3 +6,5 @@ streamlit
 pymupdf
 faiss-cpu
 bs4
+rank_bm25
+fastembed

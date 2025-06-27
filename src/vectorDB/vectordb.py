@@ -1,4 +1,5 @@
 from langchain_community.vectorstores import FAISS
+from langchain.retrievers import BM25Retriever, EnsembleRetriever
 from src.vectorDB.documentLoader import loadAndSplitDocuments
 from src.vectorDB.embeddings import embeddings
 from typing import List, Dict, Set
@@ -10,8 +11,11 @@ class VectorStore:
         self.results_template = """ You searched for "{query}" and here are the results:\n\n{results}"""
     def from_path(self, filepaths: List[str]):
         documents = loadAndSplitDocuments(filepaths)
-        self.library = FAISS.from_documents(documents, embeddings)
-    
+        self.vector_library = FAISS.from_documents(documents, embeddings)
+        self.bm25_retriever = BM25Retriever.from_documents(documents)
+        self.vector_retriever = self.vector_library.as_retriever()
+        self.library = EnsembleRetriever(retrievers=[self.vector_retriever, self.bm25_retriever])
+
     def formatResults(self, query:str, results: List[Dict]) -> str:
         search_results = ""
         for result in results:
@@ -28,7 +32,7 @@ class VectorStore:
         seen_texts: Set[str] = set()  # to avoid duplicate entries if desired
         
         print(f"Searching: {query}")
-        results = self.library.similarity_search(query, k=10)
+        results = self.library.get_relevant_documents(query, k=7)
         results_ = []
         for doc in results:
             text = doc.page_content
